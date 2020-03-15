@@ -1,8 +1,8 @@
 from os import path
 from setuptools import setup, find_packages
 
-DEPENDENCIES = ["fire", "requests"]
-TEST_DEPENDENCIES = ["pylint", "pytest", "pytest-mock", "responses"]
+DEPENDENCIES = ["flask"]
+TEST_DEPENDENCIES = ["pylint", "pytest", "pytest-mock"]
 
 
 def get_long_description():
@@ -12,7 +12,7 @@ def get_long_description():
 
 
 setup(
-    name="python-starter",
+    name="flask-starter",
     version="0.1.0",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",

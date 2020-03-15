@@ -2,11 +2,11 @@ apiVersion: skaffold/v1
 kind: Config
 build:
   artifacts:
-    - image: yoyota/python-starter
+    - image: yoyota/python-flask-starter
 deploy:
   helm:
     releases:
-      - name: python-starter
+      - name: python-flask-starter
         namespace: yoyota
         chartPath: helm
         setValueTemplates:

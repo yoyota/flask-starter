@@ -1,12 +1,14 @@
-import time
-import fire
-import requests
+from flask import Flask
+
+# pylint: disable=invalid-name
+app = Flask(__name__)
 
 
-def main(sleep_time=0.01):
-    time.sleep(sleep_time)
-    return requests.get("https://github.com")
+@app.route("/healthz")
+def health():
+    return ("", 204)
 
 
-if __name__ == "__main__":
-    fire.Fire(main)
+@app.route("/")
+def hello_world():
+    return "hello world!"

@@ -1,13 +1,21 @@
-import time
-import responses
-from starter.app import main
+# pylint: disable=redefined-outer-name
+
+import pytest
+from starter.app import app
 
 
-@responses.activate
-def test_main(mocker):
-    mocker.patch("time.sleep")
-    responses.add(responses.GET, "https://github.com", status=200, json={})
-    sleep_time = 0.1
-    response = main(sleep_time)
-    time.sleep.assert_called_with(sleep_time)  # pylint: disable=no-member
-    assert response.status_code == 200
+@pytest.fixture
+def client():
+    app.config["TESTING"] = True
+    with app.test_client() as client:
+        yield client
+
+
+def test_health(client):
+    rv = client.get("/healthz")
+    assert rv.status_code == 204
+
+
+def test_hello_world(client):
+    rv = client.get("/")
+    assert rv.data == b"hello world!"
